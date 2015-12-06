@@ -1,0 +1,11 @@
+language: java
+jdk:
+  - oraclejdk8
+
+script:
+  - ./gradlew
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  # Enable publishing to Bintray (Set BINTRAY_USER & BINTRAY_KEY environment variables)
+  #- ./gradlew bintrayUpload

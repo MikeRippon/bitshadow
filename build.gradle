@@ -1,0 +1,3 @@
+defaultTasks 'build', 'jacocoTestReport', 'publishToMavenLocal'
+
+version = '0.1-SNAPSHOT'
