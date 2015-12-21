@@ -1,3 +1,27 @@
-defaultTasks 'build', 'jacocoTestReport', 'publishToMavenLocal'
+defaultTasks 'shadowJar', 'jacocoTestReport', 'publishToMavenLocal'
 
 version = '0.1-SNAPSHOT'
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'jacoco'
+
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        testCompile 'junit:junit:4.12'
+        testCompile 'org.assertj:assertj-core:3.1.0'
+        testCompile 'org.mockito:mockito-core:1.10.8'
+    }
+
+    jacocoTestReport {
+        reports {
+            xml.enabled true
+        }
+    }
+}

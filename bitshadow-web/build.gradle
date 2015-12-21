@@ -1,0 +1,26 @@
+plugins {
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '1.2.2'
+    id "uk.co.littlemike.publishing-smorgasbord-plugin" version "0.8"
+}
+
+basicPublishing {
+    organisation = 'uk.co.littlemike'
+}
+
+dependencies {
+    compile project(":bitshadow-core")
+    compile project(":bitshadow-persistence")
+
+    compile 'io.dropwizard:dropwizard-core:0.9.1'
+    compile 'io.dropwizard:dropwizard-assets:0.9.1'
+    compile 'io.swagger:swagger-jersey2-jaxrs:1.5.4'
+    compile 'ru.vyarus:dropwizard-guicey:3.1.1'
+}
+
+mainClassName = 'com.example.helloworld.HelloWorldService'
+
+// Configure the run task to start the Dropwizard service
+run {
+    args 'server', './src/dist/config/helloworld.yml'
+}
