@@ -1,7 +1,5 @@
 package uk.co.littlemike.bitshadow.web.exceptions;
 
-import uk.co.littlemike.bitshadow.web.representations.ExceptionRepresentation;
-
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;

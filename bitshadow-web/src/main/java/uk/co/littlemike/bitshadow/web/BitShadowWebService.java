@@ -43,7 +43,7 @@ public class BitShadowWebService extends Application<BitShadowConfiguration> {
         BeanConfig swaggerConfig = new BeanConfig();
         swaggerConfig.setTitle("BitShadow web service");
         swaggerConfig.setVersion("0.0.1");
-        swaggerConfig.setResourcePackage("uk.co.littlemike.bitshadow.web.resources");
+        swaggerConfig.setResourcePackage("uk.co.littlemike.bitshadow.web");
         swaggerConfig.setScan(true);
         swaggerConfig.setBasePath("/");
     }

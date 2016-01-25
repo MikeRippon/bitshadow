@@ -1,4 +1,4 @@
-package uk.co.littlemike.bitshadow.web.representations;
+package uk.co.littlemike.bitshadow.web.exceptions;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 

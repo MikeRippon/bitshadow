@@ -1,9 +1,9 @@
-package uk.co.littlemike.bitshadow.model;
+package uk.co.littlemike.bitshadow.appinstance;
 
-public class Service {
+public class AppInstance {
     private String id;
 
-    public Service withId(String id) {
+    public AppInstance withId(String id) {
         this.id = id;
         return this;
     }

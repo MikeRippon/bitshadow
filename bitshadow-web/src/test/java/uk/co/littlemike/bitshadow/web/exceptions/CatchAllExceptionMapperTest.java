@@ -1,7 +1,6 @@
 package uk.co.littlemike.bitshadow.web.exceptions;
 
 import org.junit.Test;
-import uk.co.littlemike.bitshadow.web.representations.ExceptionRepresentation;
 
 import javax.ws.rs.core.Response;
 

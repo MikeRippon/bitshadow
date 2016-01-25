@@ -1,4 +1,4 @@
-package uk.co.littlemike.bitshadow.persistence;
+package uk.co.littlemike.bitshadow.common;
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(String message) {

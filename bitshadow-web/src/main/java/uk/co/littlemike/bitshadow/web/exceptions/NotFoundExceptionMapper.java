@@ -1,7 +1,6 @@
 package uk.co.littlemike.bitshadow.web.exceptions;
 
-import uk.co.littlemike.bitshadow.persistence.NotFoundException;
-import uk.co.littlemike.bitshadow.web.representations.ExceptionRepresentation;
+import uk.co.littlemike.bitshadow.common.NotFoundException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

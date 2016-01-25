@@ -1,6 +1,7 @@
-package uk.co.littlemike.bitshadow.web.representations;
+package uk.co.littlemike.bitshadow.web.exceptions;
 
 import org.junit.Test;
+import uk.co.littlemike.bitshadow.web.exceptions.ExceptionRepresentation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
