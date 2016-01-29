@@ -1,6 +1,7 @@
 package uk.co.littlemike.bitshadow.web.appinstance;
 
 import org.junit.Test;
+import uk.co.littlemike.bitshadow.appinstance.AppInstance;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,11 +11,10 @@ public class AppInstanceRepresentationTest {
 
     @Test
     public void mapsToAndFromDomain() {
-        AppInstanceRepresentation representation = new AppInstanceRepresentation()
-                .withId(ID);
+        AppInstance instance = new AppInstance(ID);
 
-        AppInstanceRepresentation mappedRepresentation = new AppInstanceRepresentation(representation.toDomain());
+        AppInstance mappedInstance = new AppInstanceRepresentation(instance).toDomain();
 
-        assertThat(mappedRepresentation).isEqualToComparingFieldByField(representation);
+        assertThat(mappedInstance).isEqualToComparingFieldByField(instance);
     }
 }

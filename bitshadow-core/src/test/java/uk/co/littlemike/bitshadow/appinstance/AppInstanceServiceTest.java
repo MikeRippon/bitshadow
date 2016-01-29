@@ -22,8 +22,8 @@ public class AppInstanceServiceTest {
 
     @Test
     public void createsAppInstance() {
-        AppInstance instance = new AppInstance();
-        AppInstance persistedInstance = new AppInstance();
+        AppInstance instance = new AppInstance(ID);
+        AppInstance persistedInstance = new AppInstance(ID);
         when(appInstanceRepository.registerAppInstance(instance)).thenReturn(persistedInstance);
 
         AppInstance returnedInstance = service.registerAppInstance(instance);
@@ -33,7 +33,7 @@ public class AppInstanceServiceTest {
 
     @Test
     public void returnsAppInstance() {
-        AppInstance instance = new AppInstance();
+        AppInstance instance = new AppInstance(ID);
         when(appInstanceRepository.getById(ID)).thenReturn(instance);
 
         AppInstance returnedInstance = service.getById(ID);

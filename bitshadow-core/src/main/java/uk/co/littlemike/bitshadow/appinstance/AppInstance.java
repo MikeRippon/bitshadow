@@ -1,11 +1,10 @@
 package uk.co.littlemike.bitshadow.appinstance;
 
 public class AppInstance {
-    private String id;
+    private final String id;
 
-    public AppInstance withId(String id) {
+    public AppInstance(String id) {
         this.id = id;
-        return this;
     }
 
     public String getId() {

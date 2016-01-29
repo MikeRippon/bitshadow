@@ -24,7 +24,7 @@ public class InMemoryAppInstanceRepositoryTest {
 
     @Test
     public void returnsRegisteredInstance() {
-        AppInstance savedInstance = new AppInstance().withId(ID);
+        AppInstance savedInstance = new AppInstance(ID);
         repository.registerAppInstance(savedInstance);
 
         AppInstance returnedInstance = repository.getById(ID);

@@ -11,20 +11,14 @@ public class AppInstanceRepresentation {
     @NotNull
     private String id;
 
+    public AppInstanceRepresentation() {
+    }
+
     public AppInstanceRepresentation(AppInstance instance) {
         id = instance.getId();
     }
 
-    public AppInstanceRepresentation() {
-    }
-
-    public AppInstanceRepresentation withId(String id) {
-        this.id = id;
-        return this;
-    }
-
     public AppInstance toDomain() {
-        return new AppInstance()
-                .withId(id);
+        return new AppInstance(id);
     }
 }
