@@ -18,17 +18,22 @@ public class InMemoryAppInstanceRepositoryTest {
     }
 
     @Test(expected = NotFoundException.class)
-    public void throwsExceptionIfInstanceDoesNotExist() {
+    public void getThrowsExceptionIfInstanceDoesNotExist() {
         repository.getById(ID);
     }
 
     @Test
-    public void returnsRegisteredInstance() {
+    public void findReturnsEmptyIfInstanceDoesNotExist() {
+        assertThat(repository.findById(ID)).isEmpty();
+    }
+
+    @Test
+    public void canFindAndGetSavedInstance() {
         AppInstance savedInstance = new AppInstance(ID);
-        repository.registerAppInstance(savedInstance);
 
-        AppInstance returnedInstance = repository.getById(ID);
+        repository.save(savedInstance);
 
-        assertThat(returnedInstance).isSameAs(savedInstance);
+        assertThat(repository.getById(ID)).isSameAs(savedInstance);
+        assertThat(repository.findById(ID)).contains(savedInstance);
     }
 }

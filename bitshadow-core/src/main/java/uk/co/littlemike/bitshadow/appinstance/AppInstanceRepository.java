@@ -1,7 +1,11 @@
 package uk.co.littlemike.bitshadow.appinstance;
 
+import java.util.Optional;
+
 public interface AppInstanceRepository {
     AppInstance getById(String id);
 
-    AppInstance registerAppInstance(AppInstance instance);
+    Optional<AppInstance> findById(String id);
+
+    AppInstance save(AppInstance instance);
 }

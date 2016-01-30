@@ -7,6 +7,7 @@ import uk.co.littlemike.bitshadow.common.NotFoundException;
 import javax.inject.Singleton;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Singleton
 public class InMemoryAppInstanceRepository implements AppInstanceRepository {
@@ -15,14 +16,17 @@ public class InMemoryAppInstanceRepository implements AppInstanceRepository {
 
     @Override
     public AppInstance getById(String id) {
-        if (!instancesById.containsKey(id)) {
-            throw new NotFoundException("No app instance found with id " + id);
-        }
-        return instancesById.get(id);
+        return findById(id)
+                .orElseThrow(() -> new NotFoundException("No app instance found with id " + id));
     }
 
     @Override
-    public AppInstance registerAppInstance(AppInstance instance) {
+    public Optional<AppInstance> findById(String id) {
+        return Optional.ofNullable(instancesById.get(id));
+    }
+
+    @Override
+    public AppInstance save(AppInstance instance) {
         instancesById.put(instance.getId(), instance);
         return instance;
     }

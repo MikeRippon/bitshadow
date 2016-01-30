@@ -1,13 +1,9 @@
 package uk.co.littlemike.bitshadow.web;
 
+import com.fasterxml.jackson.databind.SerializationFeature;
 import io.dropwizard.Application;
-import io.dropwizard.Configuration;
 import io.dropwizard.assets.AssetsBundle;
-import io.dropwizard.jersey.errors.EarlyEofExceptionMapper;
-import io.dropwizard.jersey.errors.LoggingExceptionMapper;
-import io.dropwizard.jersey.jackson.JsonProcessingExceptionMapper;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
-import io.dropwizard.jersey.validation.ConstraintViolationExceptionMapper;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.swagger.jaxrs.config.BeanConfig;
@@ -15,7 +11,6 @@ import io.swagger.jaxrs.listing.ApiListingResource;
 import io.swagger.jaxrs.listing.SwaggerSerializers;
 import ru.vyarus.dropwizard.guice.GuiceBundle;
 import uk.co.littlemike.bitshadow.web.config.BitShadowConfiguration;
-import uk.co.littlemike.bitshadow.web.exceptions.CatchAllExceptionMapper;
 import uk.co.littlemike.bitshadow.web.wiring.BitShadowWebModule;
 
 public class BitShadowWebService extends Application<BitShadowConfiguration> {
@@ -31,6 +26,9 @@ public class BitShadowWebService extends Application<BitShadowConfiguration> {
                 .build()
         );
         bootstrap.addBundle(new AssetsBundle("/swagger", "/swagger", "index.html"));
+        bootstrap.getObjectMapper()
+                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+                .findAndRegisterModules();
     }
 
     @Override

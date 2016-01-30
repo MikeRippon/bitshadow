@@ -3,7 +3,6 @@ package uk.co.littlemike.bitshadow.web.appinstance;
 import io.swagger.annotations.Api;
 import uk.co.littlemike.bitshadow.appinstance.AppInstance;
 import uk.co.littlemike.bitshadow.appinstance.AppInstanceService;
-import uk.co.littlemike.bitshadow.web.appinstance.AppInstanceRepresentation;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -28,15 +27,17 @@ public class AppInstanceResource {
         this.appInstanceService = appInstanceService;
     }
 
-    @Path("/{id}")
     @GET
+    @Path("/{id}")
     public AppInstanceRepresentation getById(@PathParam("id") String id) {
         return new AppInstanceRepresentation(appInstanceService.getById(id));
     }
 
     @PUT
-    public Response registerAppInstance(@Valid AppInstanceRepresentation representation) {
-        AppInstance instance = appInstanceService.registerAppInstance(representation.toDomain());
+    @Path("/{id}")
+    public Response registerAppInstance(@PathParam("id") String id,
+                                        @Valid RegisterAppInstanceRepresentation representation) {
+        AppInstance instance = appInstanceService.upsert(id, representation);
         return Response.status(CREATED)
                 .entity(new AppInstanceRepresentation(instance))
                 .build();

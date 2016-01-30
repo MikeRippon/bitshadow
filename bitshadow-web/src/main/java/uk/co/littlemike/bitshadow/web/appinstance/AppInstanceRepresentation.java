@@ -1,24 +1,24 @@
 package uk.co.littlemike.bitshadow.web.appinstance;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import uk.co.littlemike.bitshadow.appinstance.AppInstance;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class AppInstanceRepresentation {
-
-    @NotNull
-    private String id;
-
-    public AppInstanceRepresentation() {
-    }
+    private final String id;
+    private final LocalDateTime timeRegistered;
 
     public AppInstanceRepresentation(AppInstance instance) {
         id = instance.getId();
+        timeRegistered = instance.getTimeRegistered();
     }
 
-    public AppInstance toDomain() {
-        return new AppInstance(id);
+    public String getId() {
+        return id;
+    }
+
+    public LocalDateTime getTimeRegistered() {
+        return timeRegistered;
     }
 }
