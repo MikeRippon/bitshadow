@@ -42,6 +42,6 @@ public class RegisterAppInstanceRepresentationTest {
         update.getAppUpdate().applyTo(app);
 
         assertThat(update.getAppName()).isEqualTo(APP_NAME);
-        assertThat(app.getDescription()).isEqualTo(DESCRIPTION);
+        assertThat(app.getDescription()).contains(DESCRIPTION);
     }
 }

@@ -1,5 +1,7 @@
 package uk.co.littlemike.bitshadow.app;
 
+import java.util.Optional;
+
 public class App {
     private final String name;
     private String description;
@@ -16,7 +18,7 @@ public class App {
         this.description = description;
     }
 
-    public String getDescription() {
-        return description;
+    public Optional<String> getDescription() {
+        return Optional.ofNullable(description);
     }
 }

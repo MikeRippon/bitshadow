@@ -8,7 +8,7 @@ public class AppRepresentation {
 
     public AppRepresentation(App app) {
         this.name = app.getName();
-        this.description = app.getDescription();
+        this.description = app.getDescription().orElse(null);
     }
 
     public String getName() {

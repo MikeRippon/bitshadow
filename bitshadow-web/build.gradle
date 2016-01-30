@@ -19,6 +19,7 @@ dependencies {
     compile 'com.smoketurner:dropwizard-swagger:0.9.1-1'
     compile 'commons-lang:commons-lang:2.5'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.6.3'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.6.3'
 
     testCompile project('path': ':bitshadow-core', 'configuration': 'testRuntime')
 }
