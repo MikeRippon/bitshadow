@@ -1,4 +1,4 @@
-package uk.co.littlemike.bitshadow.persistence.inmemory;
+package uk.co.littlemike.bitshadow.persistence.appinstance;
 
 import uk.co.littlemike.bitshadow.appinstance.AppInstance;
 import uk.co.littlemike.bitshadow.appinstance.AppInstanceRepository;

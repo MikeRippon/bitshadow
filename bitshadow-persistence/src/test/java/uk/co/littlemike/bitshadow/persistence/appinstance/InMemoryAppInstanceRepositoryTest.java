@@ -1,8 +1,9 @@
-package uk.co.littlemike.bitshadow.persistence.inmemory;
+package uk.co.littlemike.bitshadow.persistence.appinstance;
 
 import org.junit.Before;
 import org.junit.Test;
 import uk.co.littlemike.bitshadow.appinstance.AppInstance;
+import uk.co.littlemike.bitshadow.appinstance.TestAppInstance;
 import uk.co.littlemike.bitshadow.common.NotFoundException;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,7 +30,7 @@ public class InMemoryAppInstanceRepositoryTest {
 
     @Test
     public void canFindAndGetSavedInstance() {
-        AppInstance savedInstance = new AppInstance(ID);
+        AppInstance savedInstance = new TestAppInstance().withId(ID);
 
         repository.save(savedInstance);
 

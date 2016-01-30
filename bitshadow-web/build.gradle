@@ -18,6 +18,8 @@ dependencies {
     compile 'ru.vyarus:dropwizard-guicey:3.1.1'
     compile 'commons-lang:commons-lang:2.5'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.6.3'
+
+    testCompile project('path': ':bitshadow-core', 'configuration': 'testRuntime')
 }
 
 mainClassName = 'com.example.helloworld.HelloWorldService'

@@ -2,4 +2,6 @@ dependencies {
     compile project(":bitshadow-core")
 
     compile 'com.google.inject:guice:4.0'
+
+    testCompile project('path': ':bitshadow-core', 'configuration': 'testRuntime')
 }

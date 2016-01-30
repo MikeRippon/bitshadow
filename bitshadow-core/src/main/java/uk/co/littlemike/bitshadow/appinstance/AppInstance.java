@@ -1,13 +1,17 @@
 package uk.co.littlemike.bitshadow.appinstance;
 
+import uk.co.littlemike.bitshadow.app.App;
+
 import java.time.LocalDateTime;
 
 public class AppInstance {
-    private final String id;
+    protected String id;
     private LocalDateTime timeRegistered;
+    protected App app;
 
-    public AppInstance(String id) {
+    public AppInstance(String id, App app) {
         this.id = id;
+        this.app = app;
     }
 
     public String getId() {
@@ -20,5 +24,13 @@ public class AppInstance {
 
     public void setTimeRegistered(LocalDateTime timeRegistered) {
         this.timeRegistered = timeRegistered;
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
     }
 }

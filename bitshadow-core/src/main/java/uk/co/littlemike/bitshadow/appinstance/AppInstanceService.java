@@ -1,5 +1,8 @@
 package uk.co.littlemike.bitshadow.appinstance;
 
+import uk.co.littlemike.bitshadow.app.App;
+import uk.co.littlemike.bitshadow.app.AppService;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -7,10 +10,12 @@ import javax.inject.Singleton;
 public class AppInstanceService {
 
     private final AppInstanceRepository appInstanceRepository;
+    private final AppService appService;
 
     @Inject
-    public AppInstanceService(AppInstanceRepository appInstanceRepository) {
+    public AppInstanceService(AppInstanceRepository appInstanceRepository, AppService appService) {
         this.appInstanceRepository = appInstanceRepository;
+        this.appService = appService;
     }
 
     public AppInstance getById(String id) {
@@ -18,8 +23,11 @@ public class AppInstanceService {
     }
 
     public AppInstance upsert(String id, AppInstanceUpdate update) {
-        AppInstance instance = appInstanceRepository.findById(id).orElse(new AppInstance(id));
+        App app = appService.upsert(update.getAppName(), update.getAppUpdate());
+        AppInstance instance = appInstanceRepository.findById(id)
+                .orElse(new AppInstance(id, app));
         update.applyTo(instance);
+        instance.setApp(app);
         return appInstanceRepository.save(instance);
     }
 }

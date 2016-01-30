@@ -1,5 +1,7 @@
 package uk.co.littlemike.bitshadow.web;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import io.dropwizard.Application;
 import io.dropwizard.assets.AssetsBundle;
@@ -26,8 +28,11 @@ public class BitShadowWebService extends Application<BitShadowConfiguration> {
                 .build()
         );
         bootstrap.addBundle(new AssetsBundle("/swagger", "/swagger", "index.html"));
+
         bootstrap.getObjectMapper()
                 .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+                .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
+                .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
                 .findAndRegisterModules();
     }
 
