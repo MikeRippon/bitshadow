@@ -9,6 +9,8 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import io.swagger.converter.ModelConverters;
+import io.swagger.jackson.ModelResolver;
 import ru.vyarus.dropwizard.guice.GuiceBundle;
 import uk.co.littlemike.bitshadow.web.config.BitShadowConfiguration;
 import uk.co.littlemike.bitshadow.web.wiring.BitShadowWebModule;
@@ -37,6 +39,9 @@ public class BitShadowWebService extends Application<BitShadowConfiguration> {
                 .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
                 .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
                 .findAndRegisterModules();
+
+        // Swagger to use dropwizard ObjectMapper
+        ModelConverters.getInstance().addConverter(new ModelResolver(bootstrap.getObjectMapper()));
     }
 
     @Override
