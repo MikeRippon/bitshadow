@@ -1,4 +1,4 @@
-defaultTasks 'shadowJar', 'jacocoTestReport', 'publishToMavenLocal'
+defaultTasks 'build', 'shadowJar', 'jacocoTestReport', 'publishToMavenLocal'
 
 version = '0.1-SNAPSHOT'
 
