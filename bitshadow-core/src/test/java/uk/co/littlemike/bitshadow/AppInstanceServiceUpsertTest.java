@@ -7,10 +7,10 @@ import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import uk.co.littlemike.bitshadow.app.App;
-import uk.co.littlemike.bitshadow.app.AppService;
-import uk.co.littlemike.bitshadow.app.AppUpdate;
-import uk.co.littlemike.bitshadow.appinstance.*;
+import uk.co.littlemike.bitshadow.appinstances.*;
+import uk.co.littlemike.bitshadow.apps.App;
+import uk.co.littlemike.bitshadow.apps.AppService;
+import uk.co.littlemike.bitshadow.apps.AppUpdate;
 
 import java.util.Optional;
 

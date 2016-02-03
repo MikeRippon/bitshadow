@@ -1,10 +1,10 @@
 package uk.co.littlemike.bitshadow.persistence.wiring;
 
 import com.google.inject.AbstractModule;
-import uk.co.littlemike.bitshadow.app.AppRepository;
-import uk.co.littlemike.bitshadow.appinstance.AppInstanceRepository;
-import uk.co.littlemike.bitshadow.persistence.app.InMemoryAppRepository;
-import uk.co.littlemike.bitshadow.persistence.appinstance.InMemoryAppInstanceRepository;
+import uk.co.littlemike.bitshadow.appinstances.AppInstanceRepository;
+import uk.co.littlemike.bitshadow.apps.AppRepository;
+import uk.co.littlemike.bitshadow.persistence.appinstances.InMemoryAppInstanceRepository;
+import uk.co.littlemike.bitshadow.persistence.apps.InMemoryAppRepository;
 
 public class PersistenceModule extends AbstractModule {
 
