@@ -1,7 +1,7 @@
 plugins {
     id 'application'
     id 'com.github.johnrengelman.shadow' version '1.2.2'
-    id "uk.co.littlemike.publishing-smorgasbord-plugin" version "0.8"
+    id "uk.co.littlemike.publishing-smorgasbord-plugin" version "0.9"
 }
 
 basicPublishing {
