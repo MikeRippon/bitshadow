@@ -1,4 +1,4 @@
-package uk.co.littlemike.bitshadow;
+package uk.co.littlemike.bitshadow.appinstances;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -7,7 +7,6 @@ import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import uk.co.littlemike.bitshadow.appinstances.*;
 import uk.co.littlemike.bitshadow.apps.App;
 import uk.co.littlemike.bitshadow.apps.AppService;
 import uk.co.littlemike.bitshadow.apps.AppUpdate;
