@@ -39,9 +39,6 @@ public class BitShadowWebService extends Application<BitShadowConfiguration> {
                 .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
                 .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
                 .findAndRegisterModules();
-
-        // Swagger to use dropwizard ObjectMapper
-        ModelConverters.getInstance().addConverter(new ModelResolver(bootstrap.getObjectMapper()));
     }
 
     @Override
