@@ -1,10 +1,14 @@
 package uk.co.littlemike.bitshadow.hosts;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.List;
 
+@Singleton
 public class HostService {
     private final HostRepository repository;
 
+    @Inject
     public HostService(HostRepository repository) {
         this.repository = repository;
     }

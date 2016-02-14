@@ -8,12 +8,14 @@ basicPublishing {
     organisation = 'uk.co.littlemike'
 }
 
+def dropwizardVersion = '0.9.2'
+
 dependencies {
     compile project(":bitshadow-core")
     compile project(":bitshadow-persistence")
 
-    compile 'io.dropwizard:dropwizard-core:0.9.2'
-    compile 'io.dropwizard:dropwizard-assets:0.9.2'
+    compile "io.dropwizard:dropwizard-core:$dropwizardVersion"
+    compile "io.dropwizard:dropwizard-assets:$dropwizardVersion"
     compile 'io.swagger:swagger-jersey2-jaxrs:1.5.6'
     compile 'ru.vyarus:dropwizard-guicey:3.1.1'
     compile 'com.smoketurner:dropwizard-swagger:0.9.1-1'
@@ -22,6 +24,7 @@ dependencies {
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.6.3'
 
     testCompile project('path': ':bitshadow-core', 'configuration': 'testRuntime')
+    testCompile "io.dropwizard:dropwizard-testing:$dropwizardVersion"
 }
 
 mainClassName = 'com.example.helloworld.HelloWorldService'

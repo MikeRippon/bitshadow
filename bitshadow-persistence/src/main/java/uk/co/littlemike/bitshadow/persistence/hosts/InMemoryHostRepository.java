@@ -4,8 +4,10 @@ import uk.co.littlemike.bitshadow.common.NotFoundException;
 import uk.co.littlemike.bitshadow.hosts.Host;
 import uk.co.littlemike.bitshadow.hosts.HostRepository;
 
+import javax.inject.Singleton;
 import java.util.*;
 
+@Singleton
 public class InMemoryHostRepository implements HostRepository {
     private final Map<String, Host> hostsByHostname = new HashMap<>();
 
