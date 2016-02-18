@@ -5,26 +5,19 @@ import uk.co.littlemike.bitshadow.appinstances.AppInstance;
 import uk.co.littlemike.bitshadow.appinstances.AppInstanceUpdate;
 import uk.co.littlemike.bitshadow.apps.App;
 import uk.co.littlemike.bitshadow.apps.AppUpdate;
+import uk.co.littlemike.bitshadow.hosts.Host;
+import uk.co.littlemike.bitshadow.hosts.HostUpdate;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-public class RegisterAppInstanceRepresentation implements AppInstanceUpdate, AppUpdate {
+public class RegisterAppInstanceRepresentation implements AppInstanceUpdate, AppUpdate, HostUpdate {
     @JsonIgnore
     private LocalDateTime timeRegistered = LocalDateTime.now();
     @NotNull
     private String appName;
     private String appDescription;
-
-    @Override
-    public AppUpdate getAppUpdate() {
-        return this;
-    }
-
-    @Override
-    public void applyTo(AppInstance appInstance) {
-        appInstance.setTimeRegistered(timeRegistered);
-    }
+    private String hostname;
 
     public void setTimeRegistered(LocalDateTime timeRegistered) {
         this.timeRegistered = timeRegistered;
@@ -38,13 +31,41 @@ public class RegisterAppInstanceRepresentation implements AppInstanceUpdate, App
         this.appDescription = appDescription;
     }
 
+    public void setHostname(String hostname) {
+        this.hostname = hostname;
+    }
+
     @Override
     public String getAppName() {
         return appName;
     }
 
     @Override
+    public String getHostname() {
+        return hostname;
+    }
+
+    @Override
+    public AppUpdate getAppUpdate() {
+        return this;
+    }
+
+    @Override
+    public HostUpdate getHostUpdate() {
+        return this;
+    }
+
+    @Override
+    public void applyTo(AppInstance appInstance) {
+        appInstance.setTimeRegistered(timeRegistered);
+    }
+
+    @Override
     public void applyTo(App app) {
         app.setDescription(appDescription);
+    }
+
+    @Override
+    public void applyTo(Host host) {
     }
 }

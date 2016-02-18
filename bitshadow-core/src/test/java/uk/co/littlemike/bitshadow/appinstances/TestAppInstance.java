@@ -2,13 +2,14 @@ package uk.co.littlemike.bitshadow.appinstances;
 
 import uk.co.littlemike.bitshadow.apps.App;
 import uk.co.littlemike.bitshadow.apps.TestApp;
+import uk.co.littlemike.bitshadow.hosts.TestHost;
 
 import java.time.LocalDateTime;
 
 public class TestAppInstance extends AppInstance {
 
     public TestAppInstance() {
-        super("Id", new TestApp());
+        super("Id", new TestApp(), new TestHost());
     }
 
     public TestAppInstance withId(String id) {

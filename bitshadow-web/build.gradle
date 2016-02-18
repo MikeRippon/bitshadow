@@ -25,6 +25,7 @@ dependencies {
 
     testCompile project('path': ':bitshadow-core', 'configuration': 'testRuntime')
     testCompile "io.dropwizard:dropwizard-testing:$dropwizardVersion"
+    testCompile "io.dropwizard:dropwizard-client:$dropwizardVersion"
 }
 
 mainClassName = 'com.example.helloworld.HelloWorldService'

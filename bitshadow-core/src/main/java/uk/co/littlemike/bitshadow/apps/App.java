@@ -3,7 +3,7 @@ package uk.co.littlemike.bitshadow.apps;
 import java.util.Optional;
 
 public class App {
-    private final String name;
+    protected String name;
     private String description;
 
     public App(String name) {

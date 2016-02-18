@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import uk.co.littlemike.bitshadow.appinstances.TestAppInstance;
 import uk.co.littlemike.bitshadow.apps.TestApp;
+import uk.co.littlemike.bitshadow.hosts.TestHost;
 
 import java.time.LocalDateTime;
 
@@ -13,10 +14,12 @@ public class RegisterAppInstanceRepresentationTest {
     private static final LocalDateTime TIME_REGISTERED = LocalDateTime.now();
     private static final String APP_NAME = "App name";
     private static final String DESCRIPTION = "Description";
+    private static final String HOSTNAME = "hostname";
 
     private RegisterAppInstanceRepresentation update;
     private TestAppInstance instance;
     private TestApp app;
+    private TestHost host;
 
     @Before
     public void setUp() throws Exception {
@@ -43,5 +46,14 @@ public class RegisterAppInstanceRepresentationTest {
 
         assertThat(update.getAppName()).isEqualTo(APP_NAME);
         assertThat(app.getDescription()).contains(DESCRIPTION);
+    }
+
+    @Test
+    public void appliesUpdatesToHost() {
+        update.setHostname(HOSTNAME);
+
+        update.getHostUpdate().applyTo(host);
+
+        assertThat(update.getHostname()).isEqualTo(HOSTNAME);
     }
 }

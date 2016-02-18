@@ -10,6 +10,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 import uk.co.littlemike.bitshadow.apps.App;
 import uk.co.littlemike.bitshadow.apps.AppService;
 import uk.co.littlemike.bitshadow.apps.AppUpdate;
+import uk.co.littlemike.bitshadow.apps.TestApp;
+import uk.co.littlemike.bitshadow.hosts.Host;
+import uk.co.littlemike.bitshadow.hosts.HostService;
+import uk.co.littlemike.bitshadow.hosts.HostUpdate;
+import uk.co.littlemike.bitshadow.hosts.TestHost;
 
 import java.util.Optional;
 
@@ -20,10 +25,18 @@ import static org.mockito.Mockito.*;
 public class AppInstanceServiceUpsertTest {
     private static final String ID = "Id";
     private static final String APP_NAME = "App name";
+    private static final String HOSTNAME = "hostname";
+    private static final App UPSERTED_APP = new TestApp().withName(APP_NAME);
+    private static final Host UPSERTED_HOST = new TestHost().withHostname(HOSTNAME);
 
     private AppInstanceUpdate update = spy(new AppInstanceUpdate() {
         @Override
         public void applyTo(AppInstance appInstance) {}
+
+        @Override
+        public String getAppName() {
+            return APP_NAME;
+        }
 
         @Override
         public AppUpdate getAppUpdate() {
@@ -31,22 +44,30 @@ public class AppInstanceServiceUpsertTest {
         }
 
         @Override
-        public String getAppName() {
-            return APP_NAME;
+        public String getHostname() {
+            return HOSTNAME;
+        }
+
+        @Override
+        public HostUpdate getHostUpdate() {
+            return hostUpdate;
         }
     });
 
     @Mock
-    public App upsertedApp;
+    public AppUpdate appUpdate;
 
     @Mock
-    public AppUpdate appUpdate;
+    public HostUpdate hostUpdate;
 
     @Mock
     public AppInstanceRepository appInstanceRepository;
 
     @Mock
     public AppService appService;
+
+    @Mock
+    public HostService hostService;
 
     @InjectMocks
     public AppInstanceService service;
@@ -59,7 +80,12 @@ public class AppInstanceServiceUpsertTest {
 
     @Before
     public void appServiceReturnsUpsertedApp() {
-        when(appService.upsert(APP_NAME, appUpdate)).thenReturn(upsertedApp);
+        when(appService.upsert(APP_NAME, appUpdate)).thenReturn(UPSERTED_APP);
+    }
+
+    @Before
+    public void hostServiceReturnsUpsertedHost() {
+        when(hostService.upsert(HOSTNAME, hostUpdate)).thenReturn(UPSERTED_HOST);
     }
 
     @Test
@@ -91,7 +117,7 @@ public class AppInstanceServiceUpsertTest {
 
         AppInstance savedInstance = service.upsert(ID, update);
 
-        assertThat(savedInstance.getApp()).isSameAs(upsertedApp);
+        assertThat(savedInstance.getApp()).isSameAs(UPSERTED_APP);
     }
 
     @Test
@@ -101,7 +127,26 @@ public class AppInstanceServiceUpsertTest {
 
         AppInstance savedInstance = service.upsert(ID, update);
 
-        assertThat(savedInstance.getApp()).isSameAs(upsertedApp);
+        assertThat(savedInstance.getApp()).isSameAs(UPSERTED_APP);
+    }
+
+    @Test
+    public void setsUpsertedHostOnNewInstance() {
+        existingInstanceIs(null);
+
+        AppInstance savedInstance = service.upsert(ID, update);
+
+        assertThat(savedInstance.getHost()).isSameAs(UPSERTED_HOST);
+    }
+
+    @Test
+    public void setsUpsertedHostOnExistingInstance() {
+        AppInstance instance = new TestAppInstance();
+        existingInstanceIs(instance);
+
+        AppInstance savedInstance = service.upsert(ID, update);
+
+        assertThat(savedInstance.getHost()).isSameAs(UPSERTED_HOST);
     }
 
     private void existingInstanceIs(AppInstance instance) {

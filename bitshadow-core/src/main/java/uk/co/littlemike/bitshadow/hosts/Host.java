@@ -1,7 +1,7 @@
 package uk.co.littlemike.bitshadow.hosts;
 
 public class Host {
-    private final String hostname;
+    protected String hostname;
 
     public Host(String hostname) {
         this.hostname = hostname;
