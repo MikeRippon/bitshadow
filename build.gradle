@@ -1,4 +1,4 @@
-defaultTasks 'build', 'shadowJar', 'mergedJacocoTestReport', 'publishToMavenLocal'
+defaultTasks 'build', 'shadowJar', 'jacocoMergedTestReport', 'publishToMavenLocal'
 
 version = '0.1-SNAPSHOT'
 
@@ -30,7 +30,7 @@ subprojects {
     }
 }
 
-task mergedJacocoTestReport(type: JacocoReport) {
+task jacocoMergedTestReport(type: JacocoReport) {
     dependsOn(subprojects.test)
 
     group = "Reporting"
