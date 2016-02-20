@@ -29,7 +29,7 @@ public class TestAppInstance extends AppInstance {
         return this;
     }
 
-    public AppInstance withHost(Host host) {
+    public TestAppInstance withHost(Host host) {
         this.host = host;
         return this;
     }

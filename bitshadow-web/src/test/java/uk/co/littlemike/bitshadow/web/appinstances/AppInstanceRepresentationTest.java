@@ -3,7 +3,9 @@ package uk.co.littlemike.bitshadow.web.appinstances;
 import org.junit.Test;
 import uk.co.littlemike.bitshadow.appinstances.TestAppInstance;
 import uk.co.littlemike.bitshadow.apps.TestApp;
+import uk.co.littlemike.bitshadow.hosts.TestHost;
 import uk.co.littlemike.bitshadow.web.apps.AppRepresentation;
+import uk.co.littlemike.bitshadow.web.hosts.HostRepresentation;
 
 import java.time.LocalDateTime;
 
@@ -18,6 +20,7 @@ public class AppInstanceRepresentationTest {
         TestAppInstance instance = new TestAppInstance()
                 .withId(ID)
                 .withApp(new TestApp())
+                .withHost(new TestHost())
                 .withTimeRegistered(TIME_REGISTERED);
 
         AppInstanceRepresentation representation = new AppInstanceRepresentation(instance);
@@ -25,5 +28,6 @@ public class AppInstanceRepresentationTest {
         assertThat(representation.getId()).isEqualTo(ID);
         assertThat(representation.getTimeRegistered()).isEqualTo(TIME_REGISTERED);
         assertThat(representation.getApp()).isInstanceOf(AppRepresentation.class);
+        assertThat(representation.getHost()).isInstanceOf(HostRepresentation.class);
     }
 }
