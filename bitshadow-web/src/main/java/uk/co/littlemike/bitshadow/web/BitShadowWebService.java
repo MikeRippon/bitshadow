@@ -9,8 +9,6 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
-import io.swagger.converter.ModelConverters;
-import io.swagger.jackson.ModelResolver;
 import ru.vyarus.dropwizard.guice.GuiceBundle;
 import uk.co.littlemike.bitshadow.web.config.BitShadowConfiguration;
 import uk.co.littlemike.bitshadow.web.wiring.BitShadowWebModule;

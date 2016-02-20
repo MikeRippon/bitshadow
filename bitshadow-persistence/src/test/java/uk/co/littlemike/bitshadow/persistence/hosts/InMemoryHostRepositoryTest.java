@@ -2,12 +2,9 @@ package uk.co.littlemike.bitshadow.persistence.hosts;
 
 import org.junit.Before;
 import org.junit.Test;
-import uk.co.littlemike.bitshadow.apps.App;
-import uk.co.littlemike.bitshadow.apps.AppRepository;
 import uk.co.littlemike.bitshadow.common.NotFoundException;
 import uk.co.littlemike.bitshadow.hosts.Host;
 import uk.co.littlemike.bitshadow.hosts.HostRepository;
-import uk.co.littlemike.bitshadow.persistence.apps.InMemoryAppRepository;
 
 import java.util.List;
 
