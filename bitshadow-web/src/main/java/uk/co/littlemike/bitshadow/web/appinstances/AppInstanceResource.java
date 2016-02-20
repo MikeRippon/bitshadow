@@ -19,8 +19,7 @@ import static javax.ws.rs.core.Response.Status.CREATED;
 @Api("App Instances")
 @Singleton
 public class AppInstanceResource {
-
-    public final AppInstanceService appInstanceService;
+    private final AppInstanceService appInstanceService;
 
     @Inject
     public AppInstanceResource(AppInstanceService appInstanceService) {
