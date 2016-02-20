@@ -6,6 +6,7 @@ import uk.co.littlemike.bitshadow.appinstances.AppInstance;
 import uk.co.littlemike.bitshadow.appinstances.TestAppInstance;
 import uk.co.littlemike.bitshadow.apps.TestApp;
 import uk.co.littlemike.bitshadow.common.NotFoundException;
+import uk.co.littlemike.bitshadow.hosts.TestHost;
 
 import java.util.List;
 
@@ -53,6 +54,22 @@ public class InMemoryAppInstanceRepositoryTest {
         repository.save(instance3);
 
         List<AppInstance> instances = repository.getByAppName(appName);
+
+        assertThat(instances).contains(instance1, instance2);
+    }
+
+    @Test
+    public void canGetInstancesByHostname() {
+        String hostname = "hostname";
+        AppInstance instance1 = new TestAppInstance().withHost(new TestHost().withHostname(hostname));
+        AppInstance instance2 = new TestAppInstance().withHost(new TestHost().withHostname(hostname));
+        AppInstance instance3 = new TestAppInstance().withHost(new TestHost().withHostname("Another hostname"));
+
+        repository.save(instance1);
+        repository.save(instance2);
+        repository.save(instance3);
+
+        List<AppInstance> instances = repository.getByHostname(hostname);
 
         assertThat(instances).contains(instance1, instance2);
     }

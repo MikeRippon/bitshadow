@@ -2,6 +2,7 @@ package uk.co.littlemike.bitshadow.appinstances;
 
 import uk.co.littlemike.bitshadow.apps.App;
 import uk.co.littlemike.bitshadow.apps.TestApp;
+import uk.co.littlemike.bitshadow.hosts.Host;
 import uk.co.littlemike.bitshadow.hosts.TestHost;
 
 import java.time.LocalDateTime;
@@ -25,6 +26,11 @@ public class TestAppInstance extends AppInstance {
 
     public TestAppInstance withTimeRegistered(LocalDateTime timeRegistered) {
         setTimeRegistered(timeRegistered);
+        return this;
+    }
+
+    public AppInstance withHost(Host host) {
+        this.host = host;
         return this;
     }
 }

@@ -11,4 +11,6 @@ public interface AppInstanceRepository {
     AppInstance save(AppInstance instance);
 
     List<AppInstance> getByAppName(String appName);
+
+    List<AppInstance> getByHostname(String hostname);
 }

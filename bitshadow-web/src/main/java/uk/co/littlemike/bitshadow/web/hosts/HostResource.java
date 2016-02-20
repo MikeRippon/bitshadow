@@ -1,7 +1,9 @@
 package uk.co.littlemike.bitshadow.web.hosts;
 
 import io.swagger.annotations.Api;
+import uk.co.littlemike.bitshadow.appinstances.AppInstanceService;
 import uk.co.littlemike.bitshadow.hosts.HostService;
+import uk.co.littlemike.bitshadow.web.appinstances.AppInstanceRepresentation;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -16,16 +18,18 @@ import static java.util.stream.Collectors.toList;
 @Path("/hosts")
 @Singleton
 public class HostResource {
-    private final HostService service;
+    private final HostService hostService;
+    private final AppInstanceService appInstanceService;
 
     @Inject
-    public HostResource(HostService service) {
-        this.service = service;
+    public HostResource(HostService hostService, AppInstanceService appInstanceService) {
+        this.hostService = hostService;
+        this.appInstanceService = appInstanceService;
     }
 
     @GET
     public List<HostRepresentation> getAll() {
-        return service.getAll().stream()
+        return hostService.getAll().stream()
                 .map(HostRepresentation::new)
                 .collect(toList());
     }
@@ -33,6 +37,14 @@ public class HostResource {
     @GET
     @Path("/{hostname}")
     public HostRepresentation getByHostname(@PathParam("hostname") String hostname) {
-        return new HostRepresentation(service.getByHostname(hostname));
+        return new HostRepresentation(hostService.getByHostname(hostname));
+    }
+
+    @GET
+    @Path("/{hostname}/instances")
+    public List<AppInstanceRepresentation> getInstances(@PathParam("hostname") String hostname) {
+        return appInstanceService.getByHostname(hostname).stream()
+                .map(AppInstanceRepresentation::new)
+                .collect(toList());
     }
 }

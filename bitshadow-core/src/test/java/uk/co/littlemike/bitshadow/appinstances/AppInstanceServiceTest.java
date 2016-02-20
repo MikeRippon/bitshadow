@@ -16,6 +16,7 @@ import static org.mockito.Mockito.when;
 public class AppInstanceServiceTest {
     private static final String ID = "Id";
     private static final String APP_NAME = "App name";
+    private static final String HOSTNAME = "hostname";
 
     @Mock
     public AppInstanceRepository appInstanceRepository;
@@ -39,6 +40,16 @@ public class AppInstanceServiceTest {
         when(appInstanceRepository.getByAppName(APP_NAME)).thenReturn(instances);
 
         List<AppInstance> returnedInstances = service.getByAppName(APP_NAME);
+
+        assertThat(returnedInstances).isSameAs(instances);
+    }
+
+    @Test
+    public void returnsAppsByHostname() {
+        ArrayList<AppInstance> instances = new ArrayList<>();
+        when(appInstanceRepository.getByHostname(HOSTNAME)).thenReturn(instances);
+
+        List<AppInstance> returnedInstances = service.getByHostname(HOSTNAME);
 
         assertThat(returnedInstances).isSameAs(instances);
     }

@@ -44,4 +44,8 @@ public class AppInstanceService {
     public List<AppInstance> getByAppName(String appName) {
         return appInstanceRepository.getByAppName(appName);
     }
+
+    public List<AppInstance> getByHostname(String hostname) {
+        return appInstanceRepository.getByHostname(hostname);
+    }
 }

@@ -40,4 +40,11 @@ public class InMemoryAppInstanceRepository implements AppInstanceRepository {
                 .filter(i -> i.getApp().getName().equals(appName))
                 .collect(toList());
     }
+
+    @Override
+    public List<AppInstance> getByHostname(String hostname) {
+        return instancesById.values().stream()
+                .filter(i -> i.getHost().getHostname().equals(hostname))
+                .collect(toList());
+    }
 }
