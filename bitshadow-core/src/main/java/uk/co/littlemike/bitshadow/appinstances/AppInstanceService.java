@@ -7,6 +7,7 @@ import uk.co.littlemike.bitshadow.hosts.HostService;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.List;
 
 @Singleton
 public class AppInstanceService {
@@ -38,5 +39,9 @@ public class AppInstanceService {
         instance.setApp(app);
         instance.setHost(host);
         return appInstanceRepository.save(instance);
+    }
+
+    public List<AppInstance> getByAppName(String appName) {
+        return appInstanceRepository.getByAppName(appName);
     }
 }

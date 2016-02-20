@@ -6,8 +6,11 @@ import uk.co.littlemike.bitshadow.common.NotFoundException;
 
 import javax.inject.Singleton;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 @Singleton
 public class InMemoryAppInstanceRepository implements AppInstanceRepository {
@@ -29,5 +32,12 @@ public class InMemoryAppInstanceRepository implements AppInstanceRepository {
     public AppInstance save(AppInstance instance) {
         instancesById.put(instance.getId(), instance);
         return instance;
+    }
+
+    @Override
+    public List<AppInstance> getByAppName(String appName) {
+        return instancesById.values().stream()
+                .filter(i -> i.getApp().getName().equals(appName))
+                .collect(toList());
     }
 }
