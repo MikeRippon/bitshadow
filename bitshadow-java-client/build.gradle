@@ -1,0 +1,7 @@
+plugins {
+    id "uk.co.littlemike.publishing-smorgasbord-plugin" version "0.9"
+}
+
+basicPublishing {
+    organisation = 'uk.co.littlemike'
+}
