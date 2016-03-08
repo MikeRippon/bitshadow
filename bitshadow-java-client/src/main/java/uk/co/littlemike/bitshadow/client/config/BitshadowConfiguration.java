@@ -1,10 +1,11 @@
 package uk.co.littlemike.bitshadow.client.config;
 
+import java.util.Optional;
+
 public interface BitshadowConfiguration {
     String getAppName();
 
-    default String getHostname() {
-        return new DefaultHostnameResolver().getHostname()
-                .orElseThrow(() ->new ConfigurationException("Could not establish hostname"));
+    default Optional<String> getHostname() {
+        return Optional.empty();
     }
 }

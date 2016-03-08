@@ -7,11 +7,13 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import uk.co.littlemike.bitshadow.client.config.BitshadowConfiguration;
+import uk.co.littlemike.bitshadow.client.config.HostnameResolver;
 import uk.co.littlemike.bitshadow.client.config.PojoBitshadowConfiguration;
 import uk.co.littlemike.bitshadow.client.endpoint.BitshadowEndpoint;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BitshadowServiceTest {
@@ -19,15 +21,16 @@ public class BitshadowServiceTest {
     private static final String APP_NAME = "App name";
     private static final String HOSTNAME = "Hostname";
 
-    @Mock
-    public BitshadowEndpoint endpoint;
+    @Mock BitshadowEndpoint endpoint;
+    @Mock HostnameResolver hostnameResolver;
+    BitshadowConfiguration config = new PojoBitshadowConfiguration(APP_NAME);
 
-    private BitshadowConfiguration config = new PojoBitshadowConfiguration(APP_NAME);
-    private BitshadowService service;
+    BitshadowService service;
 
     @Before
     public void setUp() {
-        service = new BitshadowService(config, endpoint);
+        when(hostnameResolver.getHostname()).thenReturn(HOSTNAME);
+        service = new BitshadowService(config, endpoint, hostnameResolver);
     }
 
     @Test
