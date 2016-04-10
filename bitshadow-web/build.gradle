@@ -1,6 +1,6 @@
 plugins {
     id 'application'
-    id 'com.github.johnrengelman.shadow' version '1.2.2'
+    id 'com.github.johnrengelman.shadow' version '1.2.3'
 }
 
 def dropwizardVersion = '0.9.2'
@@ -23,9 +23,9 @@ dependencies {
     testCompile "io.dropwizard:dropwizard-client:$dropwizardVersion"
 }
 
-mainClassName = 'com.example.helloworld.HelloWorldService'
+mainClassName = 'uk.co.littlemike.bitshadow.web.BitShadowWebService'
 
 // Configure the run task to start the Dropwizard service
 run {
-    args 'server', './src/dist/config/helloworld.yml'
+    args 'server'
 }
