@@ -5,3 +5,12 @@ plugins {
 basicPublishing {
     organisation = 'uk.co.littlemike'
 }
+
+dependencies {
+    compileOnly 'javax.ws.rs:javax.ws.rs-api:2.0.1'
+
+    testCompile 'com.github.tomakehurst:wiremock:2.0.10-beta'
+
+    testRuntime 'org.glassfish.jersey.core:jersey-client:2.21'
+    testRuntime 'org.glassfish.jersey.media:jersey-media-json-jackson:2.21'
+}

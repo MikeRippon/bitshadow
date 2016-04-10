@@ -3,9 +3,9 @@ package uk.co.littlemike.bitshadow.client;
 import java.util.UUID;
 
 public class AppInstance {
-    private final String id;
-    private final String appName;
-    private final String hostname;
+    String id;
+    String appName;
+    String hostname;
 
     public AppInstance(String appName, String hostname) {
         id = UUID.randomUUID().toString();
