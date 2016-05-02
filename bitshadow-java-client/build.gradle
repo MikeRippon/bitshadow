@@ -7,6 +7,7 @@ basicPublishing {
 }
 
 dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.21'
     compileOnly 'javax.ws.rs:javax.ws.rs-api:2.0.1'
 
     testCompile 'com.github.tomakehurst:wiremock:2.0.10-beta'

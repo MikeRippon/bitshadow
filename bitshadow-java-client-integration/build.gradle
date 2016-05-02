@@ -1,0 +1,20 @@
+plugins {
+    id "uk.co.littlemike.publishing-smorgasbord-plugin" version "0.9"
+}
+
+basicPublishing {
+    organisation = 'uk.co.littlemike'
+}
+
+println project.sourceSets.test.compileClasspath
+
+dependencies {
+    compile project(':bitshadow-java-client')
+
+    compile 'junit:junit:4.12'
+    compile 'org.assertj:assertj-core:3.1.0'
+
+    runtime 'org.glassfish.jersey.core:jersey-client:2.21'
+    runtime 'org.glassfish.jersey.media:jersey-media-json-jackson:2.21'
+    runtime 'org.slf4j:slf4j-simple:1.7.21'
+}

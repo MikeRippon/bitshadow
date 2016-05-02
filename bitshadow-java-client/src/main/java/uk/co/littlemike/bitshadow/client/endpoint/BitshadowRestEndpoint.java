@@ -18,7 +18,7 @@ public class BitshadowRestEndpoint implements BitshadowEndpoint {
     public void registerInstance(AppInstance appInstance) {
         int status = endpoint.path("app-instances")
                 .path(appInstance.getId())
-                .request()
+                .request(MediaType.APPLICATION_JSON_TYPE)
                 .put(Entity.entity(appInstance, MediaType.APPLICATION_JSON_TYPE))
                 .getStatus();
         if (status >= 300) {

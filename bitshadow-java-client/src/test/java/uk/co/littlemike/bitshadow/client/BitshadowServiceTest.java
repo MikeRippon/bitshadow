@@ -29,7 +29,7 @@ public class BitshadowServiceTest {
 
     @Mock BitshadowEndpoint endpoint;
     @Mock HostnameResolver hostnameResolver;
-    BitshadowConfiguration config = new PojoBitshadowConfiguration(APP_NAME);
+    BitshadowConfiguration config = new PojoBitshadowConfiguration(APP_NAME, "localhost:8080");
 
     BitshadowService service;
 

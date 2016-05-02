@@ -8,4 +8,6 @@ public interface BitshadowConfiguration {
     default Optional<String> getHostname() {
         return Optional.empty();
     }
+
+    String getBitshadowHost();
 }

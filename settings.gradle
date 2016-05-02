@@ -1,1 +1,7 @@
-include 'bitshadow-core', 'bitshadow-persistence', 'bitshadow-web', 'bitshadow-java-client'
+include (
+        'bitshadow-core',
+        'bitshadow-persistence',
+        'bitshadow-web',
+        'bitshadow-java-client',
+        'bitshadow-java-client-integration'
+)

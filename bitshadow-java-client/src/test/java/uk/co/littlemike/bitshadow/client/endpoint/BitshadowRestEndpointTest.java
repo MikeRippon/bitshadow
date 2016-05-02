@@ -45,6 +45,7 @@ public class BitshadowRestEndpointTest {
 
         verify(putRequestedFor(urlMatching("/app-instances/" + APP_INSTANCE_ID))
                 .withHeader("Content-Type", equalTo("application/json"))
+                .withHeader("Accept", equalTo("application/json"))
                 .withRequestBody(containing(APP_NAME))
                 .withRequestBody(containing(HOSTNAME))
         );
