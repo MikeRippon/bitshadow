@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import uk.co.littlemike.bitshadow.client.TestAppInstance;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
@@ -21,6 +22,9 @@ public class BitshadowRestEndpointTest {
 
     @Rule
     public WireMockClassRule wireMock2 = wireMock;
+
+    @Rule
+    public ExpectedException exception = ExpectedException.none();
 
     BitshadowEndpoint endpoint;
 
@@ -47,8 +51,11 @@ public class BitshadowRestEndpointTest {
     }
 
     @Test
-    public void silentlyIgnoresErrors() {
-        stubFor(put(urlMatching("/app-instances/.*")).willReturn(aResponse().withStatus(500)));
+    public void throwsExceptionIfUnableToRegisterInstance() {
+        stubFor(put(urlMatching("/app-instances/.*")).willReturn(aResponse().withStatus(300)));
+
+        exception.expect(BitshadowEndpointException.class);
+        exception.expectMessage(HOST + "/app-instances");
 
         endpoint.registerInstance(new TestAppInstance());
     }

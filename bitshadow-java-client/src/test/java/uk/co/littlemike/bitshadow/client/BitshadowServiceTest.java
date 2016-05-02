@@ -10,10 +10,16 @@ import uk.co.littlemike.bitshadow.client.config.BitshadowConfiguration;
 import uk.co.littlemike.bitshadow.client.config.HostnameResolver;
 import uk.co.littlemike.bitshadow.client.config.PojoBitshadowConfiguration;
 import uk.co.littlemike.bitshadow.client.endpoint.BitshadowEndpoint;
+import uk.co.littlemike.bitshadow.client.endpoint.BitshadowEndpointException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static uk.co.littlemike.bitshadow.client.RegistrationStatus.FAILED;
+import static uk.co.littlemike.bitshadow.client.RegistrationStatus.PENDING;
+import static uk.co.littlemike.bitshadow.client.RegistrationStatus.REGISTERED;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BitshadowServiceTest {
@@ -42,6 +48,27 @@ public class BitshadowServiceTest {
         assertThat(registeredInstance.getId()).matches(GUID);
         assertThat(registeredInstance.getAppName()).isEqualTo(APP_NAME);
         assertThat(registeredInstance.getHostname()).isEqualTo(HOSTNAME);
+    }
+
+    @Test
+    public void appRegistrationStatusIsInitiallyPending() {
+        assertThat(service.getRegistrationStatus()).isEqualTo(PENDING);
+    }
+
+    @Test
+    public void appRegistrationStatusIsRegisteredAfterSuccessfulRegistration() {
+        service.start();
+
+        assertThat(service.getRegistrationStatus()).isEqualTo(REGISTERED);
+    }
+
+    @Test
+    public void appRegistrationStatusIsFailedWhenUnableToRegister() {
+        doThrow(new BitshadowEndpointException("Oh no")).when(endpoint).registerInstance(any(AppInstance.class));
+
+        service.start();
+
+        assertThat(service.getRegistrationStatus()).isEqualTo(FAILED);
     }
 
     private AppInstance registeredAppInstance() {

@@ -16,9 +16,14 @@ public class BitshadowRestEndpoint implements BitshadowEndpoint {
 
     @Override
     public void registerInstance(AppInstance appInstance) {
-        endpoint.path("app-instances")
+        int status = endpoint.path("app-instances")
                 .path(appInstance.getId())
                 .request()
-                .put(Entity.entity(appInstance, MediaType.APPLICATION_JSON_TYPE));
+                .put(Entity.entity(appInstance, MediaType.APPLICATION_JSON_TYPE))
+                .getStatus();
+        if (status >= 300) {
+            throw new BitshadowEndpointException("Unable to register application instance at " +
+                    endpoint.getUri() + "/app-instances");
+        }
     }
 }
