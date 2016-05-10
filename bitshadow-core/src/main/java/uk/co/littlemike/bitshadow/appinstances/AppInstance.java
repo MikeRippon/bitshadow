@@ -3,13 +3,15 @@ package uk.co.littlemike.bitshadow.appinstances;
 import uk.co.littlemike.bitshadow.apps.App;
 import uk.co.littlemike.bitshadow.hosts.Host;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 public class AppInstance {
-    protected String id;
+    String id;
     private LocalDateTime timeRegistered;
-    protected App app;
-    protected Host host;
+    App app;
+    Host host;
+    Instant lastUpdated;
 
     public AppInstance(String id, App app, Host host) {
         this.id = id;
@@ -43,5 +45,13 @@ public class AppInstance {
 
     public void setHost(Host host) {
         this.host = host;
+    }
+
+    public Instant getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Instant lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 }

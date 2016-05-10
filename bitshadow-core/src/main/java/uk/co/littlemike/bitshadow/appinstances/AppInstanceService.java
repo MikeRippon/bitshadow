@@ -7,6 +7,7 @@ import uk.co.littlemike.bitshadow.hosts.HostService;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.time.Instant;
 import java.util.List;
 
 @Singleton
@@ -47,5 +48,12 @@ public class AppInstanceService {
 
     public List<AppInstance> getByHostname(String hostname) {
         return appInstanceRepository.getByHostname(hostname);
+    }
+
+    public AppInstance update(String id, AppInstanceUpdate update) {
+        AppInstance instance = appInstanceRepository.getById(id);
+        update.applyTo(instance);
+        instance.setLastUpdated(Instant.now());
+        return appInstanceRepository.save(instance);
     }
 }
