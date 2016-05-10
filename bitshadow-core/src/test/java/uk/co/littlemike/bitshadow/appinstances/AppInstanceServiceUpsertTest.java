@@ -29,7 +29,7 @@ public class AppInstanceServiceUpsertTest {
     private static final App UPSERTED_APP = new TestApp().withName(APP_NAME);
     private static final Host UPSERTED_HOST = new TestHost().withHostname(HOSTNAME);
 
-    private AppInstanceUpdate update = spy(new AppInstanceUpdate() {
+    private RegisterAppInstance update = spy(new RegisterAppInstance() {
         @Override
         public void applyTo(AppInstance appInstance) {}
 

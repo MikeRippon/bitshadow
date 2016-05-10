@@ -3,7 +3,7 @@ package uk.co.littlemike.bitshadow.appinstances;
 import uk.co.littlemike.bitshadow.apps.AppUpdate;
 import uk.co.littlemike.bitshadow.hosts.HostUpdate;
 
-public interface AppInstanceUpdate {
+public interface RegisterAppInstance {
     void applyTo(AppInstance appInstance);
 
     String getAppName();

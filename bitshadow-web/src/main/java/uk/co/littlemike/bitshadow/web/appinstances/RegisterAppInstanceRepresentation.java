@@ -2,7 +2,7 @@ package uk.co.littlemike.bitshadow.web.appinstances;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import uk.co.littlemike.bitshadow.appinstances.AppInstance;
-import uk.co.littlemike.bitshadow.appinstances.AppInstanceUpdate;
+import uk.co.littlemike.bitshadow.appinstances.RegisterAppInstance;
 import uk.co.littlemike.bitshadow.apps.App;
 import uk.co.littlemike.bitshadow.apps.AppUpdate;
 import uk.co.littlemike.bitshadow.hosts.Host;
@@ -11,7 +11,7 @@ import uk.co.littlemike.bitshadow.hosts.HostUpdate;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-public class RegisterAppInstanceRepresentation implements AppInstanceUpdate, AppUpdate, HostUpdate {
+public class RegisterAppInstanceRepresentation implements RegisterAppInstance, AppUpdate, HostUpdate {
     @JsonIgnore
     private LocalDateTime timeRegistered = LocalDateTime.now();
     @NotNull

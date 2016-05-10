@@ -30,7 +30,7 @@ public class AppInstanceService {
         return appInstanceRepository.getById(id);
     }
 
-    public AppInstance upsert(String id, AppInstanceUpdate update) {
+    public AppInstance upsert(String id, RegisterAppInstance update) {
         App app = appService.upsert(update.getAppName(), update.getAppUpdate());
         Host host = hostService.upsert(update.getHostname(), update.getHostUpdate());
         AppInstance instance = appInstanceRepository.findById(id)
