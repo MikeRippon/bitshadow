@@ -6,12 +6,12 @@ import uk.co.littlemike.bitshadow.appinstances.TestAppInstance;
 import uk.co.littlemike.bitshadow.apps.TestApp;
 import uk.co.littlemike.bitshadow.hosts.TestHost;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RegisterAppInstanceRepresentationTest {
-    private static final LocalDateTime TIME_REGISTERED = LocalDateTime.now();
+    private static final Instant TIME_REGISTERED = Instant.now();
     private static final String APP_NAME = "App name";
     private static final String DESCRIPTION = "Description";
     private static final String HOSTNAME = "hostname";
@@ -26,6 +26,7 @@ public class RegisterAppInstanceRepresentationTest {
         update = new RegisterAppInstanceRepresentation();
         instance = new TestAppInstance();
         app = new TestApp();
+        host = new TestHost();
     }
 
     @Test

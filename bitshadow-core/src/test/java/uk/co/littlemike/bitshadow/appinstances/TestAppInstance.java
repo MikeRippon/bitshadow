@@ -6,7 +6,6 @@ import uk.co.littlemike.bitshadow.hosts.Host;
 import uk.co.littlemike.bitshadow.hosts.TestHost;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class TestAppInstance extends AppInstance {
@@ -25,7 +24,7 @@ public class TestAppInstance extends AppInstance {
         return this;
     }
 
-    public TestAppInstance withTimeRegistered(LocalDateTime timeRegistered) {
+    public TestAppInstance withTimeRegistered(Instant timeRegistered) {
         setTimeRegistered(timeRegistered);
         return this;
     }

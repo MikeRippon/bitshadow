@@ -4,11 +4,11 @@ import uk.co.littlemike.bitshadow.appinstances.AppInstance;
 import uk.co.littlemike.bitshadow.web.apps.AppRepresentation;
 import uk.co.littlemike.bitshadow.web.hosts.HostRepresentation;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 public class AppInstanceRepresentation {
     private final String id;
-    private final LocalDateTime timeRegistered;
+    private final Instant timeRegistered;
     private final AppRepresentation app;
     private final HostRepresentation host;
 
@@ -23,7 +23,7 @@ public class AppInstanceRepresentation {
         return id;
     }
 
-    public LocalDateTime getTimeRegistered() {
+    public Instant getTimeRegistered() {
         return timeRegistered;
     }
 

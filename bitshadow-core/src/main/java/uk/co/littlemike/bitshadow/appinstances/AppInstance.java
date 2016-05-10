@@ -4,11 +4,10 @@ import uk.co.littlemike.bitshadow.apps.App;
 import uk.co.littlemike.bitshadow.hosts.Host;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 
 public class AppInstance {
     String id;
-    private LocalDateTime timeRegistered;
+    private Instant timeRegistered;
     App app;
     Host host;
     Instant lastUpdated;
@@ -23,11 +22,11 @@ public class AppInstance {
         return id;
     }
 
-    public LocalDateTime getTimeRegistered() {
+    public Instant getTimeRegistered() {
         return timeRegistered;
     }
 
-    public void setTimeRegistered(LocalDateTime timeRegistered) {
+    public void setTimeRegistered(Instant timeRegistered) {
         this.timeRegistered = timeRegistered;
     }
 

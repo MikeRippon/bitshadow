@@ -7,13 +7,13 @@ import uk.co.littlemike.bitshadow.hosts.TestHost;
 import uk.co.littlemike.bitshadow.web.apps.AppRepresentation;
 import uk.co.littlemike.bitshadow.web.hosts.HostRepresentation;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppInstanceRepresentationTest {
     private static final String ID = "Id";
-    private static final LocalDateTime TIME_REGISTERED = LocalDateTime.now();
+    private static final Instant TIME_REGISTERED = Instant.now();
 
     @Test
     public void mapsFromDomain() {

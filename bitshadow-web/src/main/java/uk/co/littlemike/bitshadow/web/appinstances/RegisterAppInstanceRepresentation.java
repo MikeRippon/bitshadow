@@ -9,17 +9,17 @@ import uk.co.littlemike.bitshadow.hosts.Host;
 import uk.co.littlemike.bitshadow.hosts.HostUpdate;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 public class RegisterAppInstanceRepresentation implements RegisterAppInstance, AppUpdate, HostUpdate {
     @JsonIgnore
-    private LocalDateTime timeRegistered = LocalDateTime.now();
+    private Instant timeRegistered = Instant.now();
     @NotNull
     private String appName;
     private String appDescription;
     private String hostname;
 
-    public void setTimeRegistered(LocalDateTime timeRegistered) {
+    public void setTimeRegistered(Instant timeRegistered) {
         this.timeRegistered = timeRegistered;
     }
 
