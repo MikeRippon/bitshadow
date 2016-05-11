@@ -14,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AppInstanceRepresentationTest {
     private static final String ID = "Id";
     private static final Instant TIME_REGISTERED = Instant.now();
+    private static final Instant LAST_UPDATED = Instant.now();
 
     @Test
     public void mapsFromDomain() {
@@ -21,7 +22,8 @@ public class AppInstanceRepresentationTest {
                 .withId(ID)
                 .withApp(new TestApp())
                 .withHost(new TestHost())
-                .withTimeRegistered(TIME_REGISTERED);
+                .withTimeRegistered(TIME_REGISTERED)
+                .withLastUpdated(LAST_UPDATED);
 
         AppInstanceRepresentation representation = new AppInstanceRepresentation(instance);
 
@@ -29,5 +31,6 @@ public class AppInstanceRepresentationTest {
         assertThat(representation.getTimeRegistered()).isEqualTo(TIME_REGISTERED);
         assertThat(representation.getApp()).isInstanceOf(AppRepresentation.class);
         assertThat(representation.getHost()).isInstanceOf(HostRepresentation.class);
+        assertThat(representation.getLastUpdated()).isEqualTo(LAST_UPDATED);
     }
 }

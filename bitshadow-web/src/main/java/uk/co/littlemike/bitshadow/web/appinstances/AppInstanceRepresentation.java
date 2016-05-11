@@ -11,12 +11,14 @@ public class AppInstanceRepresentation {
     private final Instant timeRegistered;
     private final AppRepresentation app;
     private final HostRepresentation host;
+    private final Instant lastUpdated;
 
     public AppInstanceRepresentation(AppInstance instance) {
         id = instance.getId();
         timeRegistered = instance.getTimeRegistered();
         app = new AppRepresentation(instance.getApp());
         host = new HostRepresentation(instance.getHost());
+        lastUpdated = instance.getLastUpdated();
     }
 
     public String getId() {
@@ -33,5 +35,9 @@ public class AppInstanceRepresentation {
 
     public HostRepresentation getHost() {
         return host;
+    }
+
+    public Instant getLastUpdated() {
+        return lastUpdated;
     }
 }
