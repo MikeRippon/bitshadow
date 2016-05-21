@@ -6,6 +6,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 public class BitshadowRestEndpoint implements BitshadowEndpoint {
     private final WebTarget endpoint;
@@ -16,14 +17,17 @@ public class BitshadowRestEndpoint implements BitshadowEndpoint {
 
     @Override
     public void registerInstance(AppInstance appInstance) {
-        int status = endpoint.path("app-instances")
+        Response response = endpoint.path("app-instances")
                 .path(appInstance.getId())
                 .request(MediaType.APPLICATION_JSON_TYPE)
-                .put(Entity.entity(appInstance, MediaType.APPLICATION_JSON_TYPE))
-                .getStatus();
-        if (status >= 300) {
-            throw new BitshadowEndpointException("Unable to register application instance at " +
-                    endpoint.getUri() + "/app-instances");
+                .put(Entity.entity(appInstance, MediaType.APPLICATION_JSON_TYPE));
+        if (response.getStatus() >= 300) {
+            throw new BitshadowEndpointException(
+                    String.format("Unable to register application instance at %s/app-instances, response code: %s, response body: %s",
+                            endpoint.getUri(),
+                            response.getStatus(),
+                            response.readEntity(String.class)
+                    ));
         }
     }
 

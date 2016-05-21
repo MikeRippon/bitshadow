@@ -54,10 +54,12 @@ public class BitshadowRestEndpointTest {
 
     @Test
     public void throwsExceptionIfUnableToRegisterInstance() {
-        stubFor(put(urlMatching("/app-instances/.*")).willReturn(aResponse().withStatus(300)));
+        stubFor(put(urlMatching("/app-instances/.*")).willReturn(aResponse().withStatus(300).withBody("Body")));
 
         exception.expect(BitshadowEndpointException.class);
         exception.expectMessage(HOST + "/app-instances");
+        exception.expectMessage("300");
+        exception.expectMessage("Body");
 
         endpoint.registerInstance(new TestAppInstance());
     }
