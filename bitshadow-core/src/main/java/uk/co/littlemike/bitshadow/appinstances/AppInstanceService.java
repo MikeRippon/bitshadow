@@ -39,6 +39,8 @@ public class AppInstanceService {
         registerAppInstance.applyTo(instance);
         instance.setApp(app);
         instance.setHost(host);
+        instance.setTimeRegistered(Instant.now());
+        instance.setLastUpdated(Instant.now());
         return appInstanceRepository.save(instance);
     }
 

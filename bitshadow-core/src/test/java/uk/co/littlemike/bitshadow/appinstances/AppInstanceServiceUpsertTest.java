@@ -88,6 +88,11 @@ public class AppInstanceServiceUpsertTest {
         when(hostService.upsert(HOSTNAME, hostUpdate)).thenReturn(UPSERTED_HOST);
     }
 
+    @Before
+    public void noInstanceExistsByDefault() {
+        existingInstanceIs(null);
+    }
+
     @Test
     public void appliesUpdateToAppInstanceThenSaves() {
         AppInstance instance = new TestAppInstance();
@@ -147,6 +152,14 @@ public class AppInstanceServiceUpsertTest {
         AppInstance savedInstance = service.register(ID, update);
 
         assertThat(savedInstance.getHost()).isSameAs(UPSERTED_HOST);
+    }
+
+    @Test
+    public void setsCreatedAndLastUpdatedTime() {
+        AppInstance instance = service.register(ID, update);
+
+        assertThat(instance.getTimeRegistered()).isNotNull();
+        assertThat(instance.getLastUpdated()).isNotNull();
     }
 
     private void existingInstanceIs(AppInstance instance) {

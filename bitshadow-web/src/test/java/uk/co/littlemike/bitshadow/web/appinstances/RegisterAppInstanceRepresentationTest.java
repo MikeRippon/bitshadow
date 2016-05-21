@@ -11,31 +11,19 @@ import java.time.Instant;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RegisterAppInstanceRepresentationTest {
-    private static final Instant TIME_REGISTERED = Instant.now();
     private static final String APP_NAME = "App name";
     private static final String DESCRIPTION = "Description";
     private static final String HOSTNAME = "hostname";
 
     private RegisterAppInstanceRepresentation update;
-    private TestAppInstance instance;
     private TestApp app;
     private TestHost host;
 
     @Before
     public void setUp() throws Exception {
         update = new RegisterAppInstanceRepresentation();
-        instance = new TestAppInstance();
         app = new TestApp();
         host = new TestHost();
-    }
-
-    @Test
-    public void appliesUpdatesToAppInstance() {
-        update.setTimeRegistered(TIME_REGISTERED);
-
-        update.applyTo(instance);
-
-        assertThat(instance.getTimeRegistered()).isEqualTo(TIME_REGISTERED);
     }
 
     @Test
