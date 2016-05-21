@@ -37,7 +37,7 @@ public class AppInstanceResource {
     @Path("/{id}")
     public Response registerAppInstance(@PathParam("id") String id,
                                         @Valid RegisterAppInstanceRepresentation representation) {
-        AppInstance instance = appInstanceService.upsert(id, representation);
+        AppInstance instance = appInstanceService.register(id, representation);
         return Response.status(CREATED)
                 .entity(new AppInstanceRepresentation(instance))
                 .build();

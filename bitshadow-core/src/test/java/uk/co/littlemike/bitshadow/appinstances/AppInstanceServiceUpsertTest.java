@@ -93,7 +93,7 @@ public class AppInstanceServiceUpsertTest {
         AppInstance instance = new TestAppInstance();
         existingInstanceIs(instance);
 
-        service.upsert(ID, update);
+        service.register(ID, update);
 
         InOrder order = inOrder(update, appInstanceRepository);
         order.verify(update).applyTo(instance);
@@ -104,7 +104,7 @@ public class AppInstanceServiceUpsertTest {
     public void createsNewInstanceUpdatesAndSaves() {
         existingInstanceIs(null);
 
-        AppInstance savedInstance = service.upsert(ID, update);
+        AppInstance savedInstance = service.register(ID, update);
 
         assertThat(savedInstance.getId()).isEqualTo(ID);
         verify(update).applyTo(savedInstance);
@@ -115,7 +115,7 @@ public class AppInstanceServiceUpsertTest {
     public void setsUpsertedAppOnNewInstance() {
         existingInstanceIs(null);
 
-        AppInstance savedInstance = service.upsert(ID, update);
+        AppInstance savedInstance = service.register(ID, update);
 
         assertThat(savedInstance.getApp()).isSameAs(UPSERTED_APP);
     }
@@ -125,7 +125,7 @@ public class AppInstanceServiceUpsertTest {
         AppInstance instance = new TestAppInstance();
         existingInstanceIs(instance);
 
-        AppInstance savedInstance = service.upsert(ID, update);
+        AppInstance savedInstance = service.register(ID, update);
 
         assertThat(savedInstance.getApp()).isSameAs(UPSERTED_APP);
     }
@@ -134,7 +134,7 @@ public class AppInstanceServiceUpsertTest {
     public void setsUpsertedHostOnNewInstance() {
         existingInstanceIs(null);
 
-        AppInstance savedInstance = service.upsert(ID, update);
+        AppInstance savedInstance = service.register(ID, update);
 
         assertThat(savedInstance.getHost()).isSameAs(UPSERTED_HOST);
     }
@@ -144,7 +144,7 @@ public class AppInstanceServiceUpsertTest {
         AppInstance instance = new TestAppInstance();
         existingInstanceIs(instance);
 
-        AppInstance savedInstance = service.upsert(ID, update);
+        AppInstance savedInstance = service.register(ID, update);
 
         assertThat(savedInstance.getHost()).isSameAs(UPSERTED_HOST);
     }

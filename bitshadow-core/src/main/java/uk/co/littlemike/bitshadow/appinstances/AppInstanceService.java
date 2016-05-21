@@ -31,12 +31,12 @@ public class AppInstanceService {
         return appInstanceRepository.getById(id);
     }
 
-    public AppInstance upsert(String id, RegisterAppInstance update) {
-        App app = appService.upsert(update.getAppName(), update.getAppUpdate());
-        Host host = hostService.upsert(update.getHostname(), update.getHostUpdate());
+    public AppInstance register(String id, RegisterAppInstance registerAppInstance) {
+        App app = appService.upsert(registerAppInstance.getAppName(), registerAppInstance.getAppUpdate());
+        Host host = hostService.upsert(registerAppInstance.getHostname(), registerAppInstance.getHostUpdate());
         AppInstance instance = appInstanceRepository.findById(id)
                 .orElse(new AppInstance(id, app, host));
-        update.applyTo(instance);
+        registerAppInstance.applyTo(instance);
         instance.setApp(app);
         instance.setHost(host);
         return appInstanceRepository.save(instance);
