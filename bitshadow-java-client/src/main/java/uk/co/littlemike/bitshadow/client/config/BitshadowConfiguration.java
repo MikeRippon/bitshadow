@@ -10,4 +10,6 @@ public interface BitshadowConfiguration {
     }
 
     String getBitshadowHost();
+
+    long getHeartbeatIntervalMillis();
 }

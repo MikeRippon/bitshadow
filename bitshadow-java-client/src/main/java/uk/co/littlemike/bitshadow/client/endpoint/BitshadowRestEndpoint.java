@@ -26,4 +26,15 @@ public class BitshadowRestEndpoint implements BitshadowEndpoint {
                     endpoint.getUri() + "/app-instances");
         }
     }
+
+    @Override
+    public boolean heartbeat(String instanceId) {
+        int status = endpoint.path("app-instances")
+                .path(instanceId)
+                .path("status")
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .put(Entity.entity("", MediaType.APPLICATION_JSON_TYPE))
+                .getStatus();
+        return status < 300;
+    }
 }

@@ -1,14 +1,12 @@
 package uk.co.littlemike.bitshadow.client;
 
-import java.util.UUID;
-
 public class AppInstance {
     String id;
     String appName;
     String hostname;
 
-    public AppInstance(String appName, String hostname) {
-        id = UUID.randomUUID().toString();
+    public AppInstance(String id, String appName, String hostname) {
+        this.id = id;
         this.appName = appName;
         this.hostname = hostname;
     }

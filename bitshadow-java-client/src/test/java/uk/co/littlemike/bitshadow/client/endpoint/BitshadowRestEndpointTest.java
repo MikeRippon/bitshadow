@@ -9,6 +9,7 @@ import org.junit.rules.ExpectedException;
 import uk.co.littlemike.bitshadow.client.TestAppInstance;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BitshadowRestEndpointTest {
     private static final int PORT = 11856;
@@ -59,5 +60,27 @@ public class BitshadowRestEndpointTest {
         exception.expectMessage(HOST + "/app-instances");
 
         endpoint.registerInstance(new TestAppInstance());
+    }
+
+    @Test
+    public void sendsHeartbeat() {
+        stubFor(put(urlMatching("/app-instances/.*/status")).willReturn(aResponse().withStatus(200)));
+
+        boolean result = endpoint.heartbeat(APP_INSTANCE_ID);
+
+        assertThat(result).isTrue();
+        verify(putRequestedFor(urlMatching("/app-instances/" + APP_INSTANCE_ID + "/status"))
+               .withHeader("Content-Type", equalTo("application/json"))
+               .withHeader("Accept", equalTo("application/json"))
+        );
+    }
+
+    @Test
+    public void returnsFalseIfHeartbeatFails() {
+        stubFor(put(urlMatching("/app-instances/.*/status")).willReturn(aResponse().withStatus(300)));
+
+        boolean result = endpoint.heartbeat(APP_INSTANCE_ID);
+
+        assertThat(result).isFalse();
     }
 }

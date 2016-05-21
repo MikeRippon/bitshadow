@@ -1,6 +1,5 @@
 package uk.co.littlemike.bitshadow.web.appinstances;
 
-import io.dropwizard.jersey.PATCH;
 import io.swagger.annotations.Api;
 import uk.co.littlemike.bitshadow.appinstances.AppInstance;
 import uk.co.littlemike.bitshadow.appinstances.AppInstanceService;
@@ -43,8 +42,8 @@ public class AppInstanceResource {
                 .build();
     }
 
-    @PATCH
-    @Path("/{id}")
+    @PUT
+    @Path("/{id}/status")
     public Response updateStatus(@PathParam("id") String id) {
         AppInstance instance = appInstanceService.update(id, i -> {});
         return Response.ok(new AppInstanceRepresentation(instance)).build();

@@ -1,14 +1,10 @@
 package uk.co.littlemike.bitshadow.client;
 
-import java.util.UUID;
+import static uk.co.littlemike.bitshadow.client.TestObject.uuid;
 
-public class TestAppInstance extends AppInstance {
+public class TestAppInstance extends AppInstance implements TestObject {
     public TestAppInstance() {
-        super("App-" + uuid(), "Host-" + uuid());
-    }
-
-    private static String uuid() {
-        return UUID.randomUUID().toString();
+        super(uuid(), "App-" + uuid(), "Host-" + uuid());
     }
 
     public TestAppInstance withId(String id) {

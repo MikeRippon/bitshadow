@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import uk.co.littlemike.bitshadow.client.config.BitshadowConfiguration;
@@ -14,9 +15,7 @@ import uk.co.littlemike.bitshadow.client.endpoint.BitshadowEndpointException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static uk.co.littlemike.bitshadow.client.RegistrationStatus.FAILED;
 import static uk.co.littlemike.bitshadow.client.RegistrationStatus.PENDING;
 import static uk.co.littlemike.bitshadow.client.RegistrationStatus.REGISTERED;
@@ -29,6 +28,7 @@ public class BitshadowServiceTest {
 
     @Mock BitshadowEndpoint endpoint;
     @Mock HostnameResolver hostnameResolver;
+    @Mock Heartbeat heartbeat;
     BitshadowConfiguration config = new PojoBitshadowConfiguration(APP_NAME, "localhost:8080");
 
     BitshadowService service;
@@ -36,7 +36,7 @@ public class BitshadowServiceTest {
     @Before
     public void setUp() {
         when(hostnameResolver.getHostname()).thenReturn(HOSTNAME);
-        service = new BitshadowService(config, endpoint, hostnameResolver);
+        service = new BitshadowService(config, endpoint, hostnameResolver, heartbeat);
     }
 
     @Test
@@ -64,11 +64,59 @@ public class BitshadowServiceTest {
 
     @Test
     public void appRegistrationStatusIsFailedWhenUnableToRegister() {
-        doThrow(new BitshadowEndpointException("Oh no")).when(endpoint).registerInstance(any(AppInstance.class));
+        registrationFails();
 
         service.start();
 
         assertThat(service.getRegistrationStatus()).isEqualTo(FAILED);
+    }
+
+    @Test
+    public void startsHeartbeatAfterRegistration() {
+        service.start();
+
+        InOrder inOrder = inOrder(endpoint, heartbeat);
+        inOrder.verify(endpoint).registerInstance(any());
+        inOrder.verify(heartbeat).start(anyString());
+    }
+
+    @Test
+    public void doesNotStartHeartbeatIfRegistrationFailed() {
+        registrationFails();
+
+        service.start();
+
+        verify(heartbeat, never()).start(anyString());
+    }
+
+    @Test
+    public void startsHeartbeatWithRegisteredAppInstanceId() {
+        service.start();
+
+        String instanceId = registeredAppInstance().getId();
+        verify(heartbeat).start(instanceId);
+    }
+
+    @Test
+    public void returnsHeartbeatStatus() {
+        when(heartbeat.getStatus()).thenReturn(HeartbeatStatus.PENDING);
+
+        HeartbeatStatus heartbeatStatus = service.getHeartbeatStatus();
+
+        assertThat(heartbeatStatus).isEqualTo(HeartbeatStatus.PENDING);
+    }
+
+    @Test
+    public void stopsHeartbeat() {
+        service.start();
+
+        service.stop();
+
+        verify(heartbeat).stop();
+    }
+
+    private void registrationFails() {
+        doThrow(new BitshadowEndpointException("Oh no")).when(endpoint).registerInstance(any(AppInstance.class));
     }
 
     private AppInstance registeredAppInstance() {
